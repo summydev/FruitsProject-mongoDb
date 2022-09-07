@@ -5,18 +5,18 @@ mongoose.connect("mongodb://localhost:27017/fruitsDB", {
 // const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 
-const fruitSchema = new mongoose.Schema({
-  name: String,
-  rating: Number,
-  review: String,
-});
-const Fruit = mongoose.model("Fruit", fruitSchema);
-const fruit = new Fruit({
-  name: "Apple",
-  rating: 7,
-  review: "The applle taste good but looks ugly",
-});
-fruit.save();
+// const fruitSchema = new mongoose.Schema({
+//   name: String,
+//   rating: Number,
+//   review: String,
+// });
+// const Fruit = mongoose.model("Fruit", fruitSchema);
+// const fruit = new Fruit({
+//   name: "Apple",
+//   rating: 7,
+//   review: "The applle taste good but looks ugly",
+// });
+// fruit.save();
 
 const personSchema = new mongoose.Schema({
   name: String,
@@ -28,6 +28,31 @@ const person = Person({
   age: 15,
 });
 person.save();
+
+const fruitSchema = new mongoose.Schema({
+  name: String,
+  score: Number,
+  review: String,
+});
+const Fruit = new mongoose.model("fruit", fruitSchema);
+const kiwi = Fruit({
+  name: "kiwi",
+  score: 5,
+  review: "tastes good..hmmm...",
+});
+const mango = Fruit({
+  name: "mango",
+  score: 5,
+  review: "tastes good..hmmm...",
+});
+Fruit.insertMany([kiwi, mango], function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("successfully saved the fruits");
+  }
+});
+
 // const findDocuments = function (db, callback) {
 //   const collection = db.collection("fruits");
 //   collection.find({}).toArray(function (err, fruits) {
