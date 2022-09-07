@@ -37,19 +37,30 @@ const fruitSchema = new mongoose.Schema({
 const Fruit = new mongoose.model("fruit", fruitSchema);
 const kiwi = Fruit({
   name: "kiwi",
-  score: 5,
+  score: 2,
   review: "tastes good..hmmm...",
 });
 const mango = Fruit({
   name: "mango",
-  score: 5,
+  score: 2,
   review: "tastes good..hmmm...",
 });
-Fruit.insertMany([kiwi, mango], function (err) {
+// Fruit.insertMany([kiwi, mango], function (err) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("successfully saved the fruits");
+//   }
+// });
+Fruit.find(function (err, fruits) {
   if (err) {
     console.log(err);
   } else {
-    console.log("successfully saved the fruits");
+    // console.log(fruits);
+    mongoose.connection.close();
+    fruits.forEach(function (fruit) {
+      console.log(fruit.name);
+    });
   }
 });
 
