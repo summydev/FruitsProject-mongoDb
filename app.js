@@ -5,15 +5,30 @@ mongoose.connect("mongodb://localhost:27017/fruitsDB", {
 // const MongoClient = require("mongodb").MongoClient;
 // const assert = require("assert");
 
-
 const personSchema = new mongoose.Schema({
   name: String,
   age: Number,
+  favFruit: fruitSchema,
 });
 const Person = mongoose.model("person", personSchema);
+
+const soursop = new Fruit({
+  name: "Soursop",
+  rating: 8,
+  review: "sour fruit",
+});
+soursop.save();
+Person.updateOne({ name: summydev }, { favFruit: sourkiwi }, function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("update susccesful");
+  }
+});
 const person = Person({
   name: "summydev",
   age: 15,
+  favFruit: soursop,
 });
 //person.save();
 
